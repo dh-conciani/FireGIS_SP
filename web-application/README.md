@@ -1,3 +1,3 @@
 <img src="https://github.com/musx/FireLand_SPv1/blob/master/web-application/www/logo_1.png?raw=true" width="350" />
-http://bit.ly/FireLandSP
+Acesse aqui: http://bit.ly/FireLandSP
 
