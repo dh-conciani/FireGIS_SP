@@ -34,7 +34,7 @@ sudo apt-get -y install libcurl4-gnutls-dev libxml2-dev libssl-dev
 
 ## install r packages
 sudo su - -c "R -e \"install.packages(c('devtools','rmarkdown', 'quantmod'), repos='http://cran.rstudio.com/')\""
-sudo su - -c "R -e \"devtools::install_github("jbkunst/highcharter")\""
+sudo su - -c "R -e \"install.packages(c('shinyjs','leaflet', 'leaflet.extras', 'rgdal', 'stringi', 'sf', 'raster', 'htmlwidgets', 'shiniydashboard', 'ggplot2', 'bsplus'), repos='http://cran.rstudio.com/')\""
 
 ## install r studio server
 sudo apt-get install gdebi-core
