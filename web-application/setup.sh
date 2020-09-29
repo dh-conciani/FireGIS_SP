@@ -60,6 +60,7 @@ sudo su - -c "R -e \"install.packages(c('shinydashboard'))\""
 sudo su - -c "R -e \"install.packages(c('ggplot2'))\""
 sudo su - -c "R -e \"install.packages(c('shinyWidgets'))\""
 sudo su - -c "R -e \"install.packages(c('bsplus'))\""
+sudo su - -c "R -e \"install.packages(c('rgeos'))\""
 
 ## install r studio server
 sudo apt-get install gdebi-core
