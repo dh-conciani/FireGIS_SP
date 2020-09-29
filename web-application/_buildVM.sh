@@ -40,6 +40,17 @@ apt-get upgrade
 ## update ubuntu libraries
 sudo apt-get -y install libcurl4-gnutls-dev libxml2-dev libssl-dev
 
+## install GDAL
+sudo add-apt-repository ppa:ubuntugis/ppa
+sudo apt-get update
+sudo apt-get install gdal-bin
+
+## build python GDAL
+sudo apt-get install libgdal-dev
+export CPLUS_INCLUDE_PATH=/usr/include/gdal
+export C_INCLUDE_PATH=/usr/include/gdal
+pip install GDAL==<GDAL VERSION FROM OGRINFO>
+
 ## install r packages
 sudo su - -c "R -e \"install.packages(c('devtools','rmarkdown', 'quantmod'), repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages(c('shinyjs','leaflet', 'leaflet.extras', 'rgdal', 'stringi', 'sf', 'raster', 'htmlwidgets', 'shiniydashboard', 'ggplot2', 'bsplus'), repos='http://cran.rstudio.com/')\""
