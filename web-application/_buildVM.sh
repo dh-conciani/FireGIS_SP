@@ -1,4 +1,8 @@
-## e2-small	2vCPUs (25%) + burst 100% (2-3min)	2GB RAM us-west Oregon $12.23 month
+## e2-small	
+## 2vCPUs (25%) + burst 100% (2-3min)	
+## 2GB RAM
+## 35 GB HD
+## Google us-west Oregon $12.23 month
 ## Ubuntu 16.04 LTS
 
 ## set user privileges
@@ -69,4 +73,3 @@ sudo wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.9.9
 sudo gdebi shiny-server-1.5.9.923-amd64.deb
 
 ## server started at IP:3838 port
-
