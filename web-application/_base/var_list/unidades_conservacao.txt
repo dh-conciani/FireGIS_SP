@@ -1,0 +1,146 @@
+CATEGORIA	UNIDADE	TIPO
+Estação Experimental	EEx Tupi	Uso Sustentável
+Floresta Estadual	FE Serra DÁgua	Uso Sustentável
+Estação Experimental	EEx Santa Rita do Passa Quatro	Uso Sustentável
+Estação Experimental	EEx São Simão	Uso Sustentável
+Estação Experimental	EEx Mogi Mirim	Uso Sustentável
+Estação Experimental	EEx Mogi Guaçú	Uso Sustentável
+Estação Experimental	EEx Luis Antônio	Uso Sustentável
+Estação Experimental	EEx Jaú	Uso Sustentável
+Estação Experimental	EEx Itirapina	Uso Sustentável
+Estação Experimental	EEx Itararé	Uso Sustentável
+Estação Experimental	EEx Itapetininga	Uso Sustentável
+Estação Experimental	EEx Casa Branca	Uso Sustentável
+Estação Experimental	EEx Cajuru	Uso Sustentável
+Estação Experimental	EEx Buri	Uso Sustentável
+Estação Experimental	EEX Bento Quirino	Uso Sustentável
+Floresta Estadual	FE Bebedouro	Uso Sustentável
+Estação Experimental	EEx Bauru	Uso Sustentável
+Estação Experimental	EEx Araraquara	Uso Sustentável
+Estação Experimental	EEx Itapeva	Uso Sustentável
+Floresta Estadual	FE Noroeste Paulista	Uso Sustentável
+Reserva Extrativista	RESEX Taquari	Uso Sustentável
+Reserva Extrativista	RESEX Tumba	Uso Sustentável
+Reserva Biológica	REBIO de Mogi-Guaçu	Proteção Integral
+Reserva Biológica	REBIO de SertÃ£ozinho	Proteção Integral
+Reserva Biológica	REBIO Pindorama	Proteção Integral
+Reserva Biológica	REBIO do Alto da Serra de Paranapiacaba	Proteção Integral
+Res. Des Sustentável	RDS Barreiro/Anhemas	Uso Sustentável
+Res. Des Sustentável	RDS Itapanhapima	Uso Sustentável
+Res. Des Sustentável	RDS Lavras	Uso Sustentável
+Res. Des Sustentável	RDS Pinheirinhos	Uso Sustentável
+Res. Des Sustentável	RDS Quilombos de Barra do Turvo	Uso Sustentável
+Parque Estadual	P. E. Carlos Botelho	Proteção Integral
+Parque Estadual	P. E. Porto Ferreira	Proteção Integral
+Parque Estadual	P. E. Furnas do Bom Jesus	Proteção Integral
+Parque Estadual	P. E. Fontes do Ipiranga	Proteção Integral
+Parque Estadual	P. E. Campina do Encantado	Proteção Integral
+Parque Estadual	P. E. Cantareira	Proteção Integral
+Parque Estadual	P. E. Jaraguá	Proteção Integral
+Parque Estadual	P. E. Alberto Lofgren	Proteção Integral
+Parque Estadual	P. E. Campos do Jordão	Proteção Integral
+Parque Estadual	P.E. Mananciais de Campos de Jordão	Proteção Integral
+Parque Estadual	P. E. Juquery	Proteção Integral
+Parque Estadual	P. E. Ara	Proteção Integral
+Parque Estadual	P. E. Vassununga	Proteção Integral
+Parque Estadual	P. E. Intervales	Proteção Integral
+Parque Estadual	P. E. Turístico Alto do Ribeira	Proteção Integral
+Parque Estadual	P. E. Caverna do Diabo	Proteção Integral
+Parque Estadual	P. E. Lagamar de Cananéia	Proteção Integral
+Parque Estadual	P. E. Rio Turvo	Proteção Integral
+Parque Estadual	P. E. Jurupará	Proteção Integral
+Parque Estadual	P. E. Ilha do Cardoso	Proteção Integral
+Parque Estadual	P. E. do Itaberaba	Proteção Integral
+Parque Estadual	P. E. do Itapetinga	Proteção Integral
+Parque Estadual	P. E. Chácara da Baronesa/APA Haras	Proteção Integral
+Parque Estadual	P. E. Restinga de Bertioga	Proteção Integral
+Parque Estadual	P. E. Serra do Mar	Proteção Integral
+Parque Estadual	P. E. Serra do Mar	Proteção Integral
+Parque Estadual	P.E. Nascentes do Paranapanema	Proteção Integral
+Monumento Natural	M. N. E. da Pedra Grande	Uso Sustentável
+Monumento Natural	M. N. Geiseritos de Anhembi	Uso Sustentável
+Monumento Natural	M. N. E. da Pedra Grande	Uso Sustentável
+Monumento Natural	M. N. E. da Pedra do Baú	Uso Sustentável
+Floresta Estadual	F. E. Paranapanema	Uso Sustentável
+Floresta Estadual	F. E. Avaré	Uso Sustentável
+Floresta Estadual	F. E. Manduri	Uso Sustentável
+Floresta Estadual	F. E. Piraju	Uso Sustentável
+Floresta Estadual	F. E. Botucatu	Uso Sustentável
+Floresta Estadual	F. E. Bebedouro	Uso Sustentável
+Floresta Estadual	F. E. Assis	Uso Sustentável
+Floresta Estadual	F. E. Angatuba	Uso Sustentável
+Floresta Estadual	F. E. Batatais	Uso Sustentável
+Floresta Estadual	F. E. Edmundo Navarro de Andrade	Uso Sustentável
+Floresta Estadual	F. E. Pederneiras	Uso Sustentável
+Floresta Estadual	F. E. de Guarulhos	Uso Sustentável
+Floresta Estadual	F. E. Serra dÁgua	Uso Sustentável
+Floresta Estadual	F. E. Águas de Santa Bárbara	Uso Sustentável
+Estação Ecológica	E. Ec. Chaúas	Proteção Integral
+Estação Ecológica	E. Ec. Xituê	Proteção Integral
+Estação Ecológica	E. Ec. Ibicatu	Proteção Integral
+Estação Ecológica	E. Ec. Ribeirão Preto	Proteção Integral
+Estação Ecológica	E. Ec. Mogi Guaçú	Proteção Integral
+Estação Ecológica	E. Ec. Itapeti	Proteção Integral
+Estação Ecológica	E. Ec. Valinhos	Proteção Integral
+Estação Ecológica	E. Ec. Angatuba	Proteção Integral
+Estação Ecológica	E. Ec. Paranapanema	Proteção Integral
+Estação Ecológica	E. Ec. Itapeva	Proteção Integral
+Estação Ecológica	E. Ec. Itaberá	Proteção Integral
+Estação Ecológica	E. Ec. Assis	Proteção Integral
+Estação Ecológica	E. Ec. Caetetus	Proteção Integral
+Estação Ecológica	E. Ec. Mata do Jacareí	Proteção Integral
+Estação Ecológica	E. Ec. Paulo de Faria	Proteção Integral
+Estação Ecológica	E. Ec. Bauru	Proteção Integral
+Estação Ecológica	E. Ec. Jataí	Proteção Integral
+Estação Ecológica	E. Ec. Itirapina	Proteção Integral
+Estação Ecológica	E. Ec. Juréia-Itatins	Proteção Integral
+Estação Ecológica	E. Ec. do Noroeste Paulista	Proteção Integral
+Estação Ecológica	E. Ec. dos Banhados de Iguape	Proteção Integral
+Estação Ecológica	E. Ec. do Barreiro Rico	Proteção Integral
+Estação Ecológica	E. Ec. Marília	Proteção Integral
+Estação Ecológica	E. Ec. de Avaré	Proteção Integral
+Estação Ecológica	E. Ec. Santa Maria	Proteção Integral
+Estação Ecológica	E. Ec. Santa Bárbara	Proteção Integral
+Area Relev.Int.Ecologico	ARIE da Pedra Branca	Uso Sustentável
+Area Relev.Int.Ecologico	ARIE da Zona V. Silvestre da APA da I. Comprida	Uso Sustentável
+Área de Prot. Ambiental	APA Cajati	Uso Sustentável
+Área de Prot. Ambiental	APA Planalto do Turvo	Uso Sustentável
+Área de Prot. Ambiental	APA Rios Vermelho e Pardinho	Uso Sustentável
+Área de Prot. Ambiental	APA da Ilha Comprida	Uso Sustentável
+Área de Prot. Ambiental	APA Ibitinga	Uso Sustentável
+Área de Prot. Ambiental	APA Rio Batalha	Uso Sustentável
+Área de Prot. Ambiental	APA Corumbataí­, Botucatu e Tejupá - Per.Coru	Uso Sustentável
+Área de Prot. Ambiental	APA Piracicaba e Juqueri-Mirim - Ãrea I	Uso Sustentável
+Área de Prot. Ambiental	APA Corumbataí, Botucatu e Tejupá - Per. Botucat	Uso Sustentável
+Área de Prot. Ambiental	APA Piracicaba e Juqueri-Mirim - Área II	Uso Sustentável
+Área de Prot. Ambiental	APA Sistema Cantareira	Uso Sustentável
+Área de Prot. Ambiental	APA Itupararanga	Uso Sustentável
+Área de Prot. Ambiental	APA Sapucaí-Mirim	Uso Sustentável
+Área de Prot. Ambiental	APA Campos do Jordão	Uso Sustentável
+Área de Prot. Ambiental	APA Cajamar	Uso Sustentável
+Área de Prot. Ambiental	APA Morro de São Bento	Uso Sustentável
+Área de Prot. Ambiental	APA São Francisco Xavier	Uso Sustentável
+Área de Prot. Ambiental	APA do Banhado	Uso Sustentável
+Área de Prot. Ambiental	APA Várzea do Tietê	Uso Sustentável
+Área de Prot. Ambiental	APA Parque e Fazenda do Carmo	Uso Sustentável
+Área de Prot. Ambiental	APA Jundiaí	Uso Sustentável
+Área de Prot. Ambiental	APA Cabreúva	Uso Sustentável
+Área de Prot. Ambiental	APA Tietê	Uso Sustentável
+Área de Prot. Ambiental	APA Mata do Iguatemi	Uso Sustentável
+Área de Prot. Ambiental	APA Represa Bairro da Usina	Uso Sustentável
+Área de Prot. Ambiental	APA Quilombos do Médio Ribeira	Uso Sustentável
+Área de Prot. Ambiental	APA Corumbataí, Botucatu e Tejupá - Per. Tejupá	Uso Sustentável
+Área de Prot. Ambiental	APA Serra do Mar	Uso Sustentável
+Parque Nacional	PN do Superagui	Proteção Integral
+Área de Prot. Ambiental	APA Cananéia-Iguapé-Peruíbe	Uso Sustentável
+Área de Prot. Ambiental	APA Guaragueçaba	Uso Sustentável
+Area Relev.Int.Ecologico	ARIE Mata de Santa Genebra	Uso Sustentável
+Area Relev.Int.Ecologico	ARIE Buriti de Vassununga	Uso Sustentável
+Reserva Extrativista	RE Mandira	Uso Sustentável
+Florestal Nacional	Flona de Ipanema	Proteção Integral
+Estação Ecológica	E. Ec. dos Tupiniquins	Proteção Integral
+Área de Prot. Ambiental	APA Paraíba do Sul	Uso Sustentável
+Area Relev.Int.Ecologico	ARIE Cerrado Pé de Gigante	Uso Sustentável
+Area Relev.Int.Ecologico	ARIE Matão de Cosmópolis	Uso Sustentável
+Florestal Nacional	Flona Capão Bonito	Proteção Integral
+Área de Prot. Ambiental	APA Serra da Mantiqueira	Uso Sustentável
