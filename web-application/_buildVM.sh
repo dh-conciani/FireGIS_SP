@@ -29,13 +29,19 @@ gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
 sudo apt-get -y install r-base
 
+## update r base
+sudo su
+echo "deb http://www.stats.bris.ac.uk/R/bin/linux/ubuntu precise/" >> /etc/apt/sources.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+apt-get update
+apt-get upgrade
+
 ## update ubuntu libraries
 sudo apt-get -y install libcurl4-gnutls-dev libxml2-dev libssl-dev
 
 ## install r packages
 sudo su - -c "R -e \"install.packages(c('devtools','rmarkdown', 'quantmod'), repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages(c('shinyjs','leaflet', 'leaflet.extras', 'rgdal', 'stringi', 'sf', 'raster', 'htmlwidgets', 'shiniydashboard', 'ggplot2', 'bsplus'), repos='http://cran.rstudio.com/')\""
-devtools::install_github('rspatial/raster')
 
 ## install r studio server
 sudo apt-get install gdebi-core
