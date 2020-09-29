@@ -1,4 +1,4 @@
-## e2-micro	2	1GB	$9.71 month
+## e2-small	2vCPUs (25%) + burst 100% (2-3min)	2GB RAM us-west Oregon $12.23 month
 ## set user privileges
 sudo passwd
 ******** # set
