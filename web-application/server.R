@@ -171,7 +171,7 @@ function(input, output, session) {
   ## load cities list
   mun_list = reactive ({
     if (input$spatial_filter == "City") {
-      mun <- read.table (paste0(varlis_path, "municipios.txt"), sep="\t")
+      mun <- read.table (paste0(varlis_path, "municipios.txt"), sep="\t",  encoding = "latin1")
       return (mun$V1)
     }
   })
@@ -183,7 +183,7 @@ function(input, output, session) {
   ## load categories
   cat_list = reactive ({
     if (input$spatial_filter == "Protected Area") {
-      cat <- read.table (paste0(varlis_path, "unidades_conservacao.txt"), sep="\t", header=TRUE)
+      cat <- read.table (paste0(varlis_path, "unidades_conservacao.txt"), sep="\t", header=TRUE, encoding = "latin1")
       return (sort(cat$CATEGORIA))
     }
   })
@@ -196,7 +196,7 @@ function(input, output, session) {
   uc_list = reactive ({
     if (input$spatial_filter == "Protected Area") {
       if (input$category != "") {
-      uc <- read.table (paste0(varlis_path, "unidades_conservacao.txt"), sep="\t", header=TRUE)
+      uc <- read.table (paste0(varlis_path, "unidades_conservacao.txt"), sep="\t", header=TRUE,  encoding = "latin1")
       uc <- subset(uc, CATEGORIA == input$category) 
       return (sort(uc$UNIDADE))
       }

@@ -23,7 +23,7 @@ bootstrapPage(
     width = "100%", height = "auto",
     
     HTML('<center> <b>supported by: &nbsp; &nbsp; </b> <img src="https://logodownload.org/wp-content/uploads/2015/02/unesp-logo-5.png" width="100" height="33">
-                  &nbsp;&nbsp; <img src="https://gradeup.com.br/wp-content/uploads/2017/06/bulletin-logo.png" width="100" height="30">
+                  &nbsp;&nbsp; <img src="https://www.logolynx.com/images/logolynx/39/39689184e2762613f0d38d3695c5d003.jpeg" width="100" height="25">
                   &nbsp;&nbsp; <img src="https://1.bp.blogspot.com/-BDHEoAg7wNQ/XY9ZEIICkeI/AAAAAAACXmc/buKFKKFUFmsOhg6SYgwuItfW6xo7gsgQgCLcBGAsYHQ/w600-h315-p-k-no-nu/uema-logotipo-indagacao-site.jpg" width="120" height="55">
                   &nbsp;&nbsp; <img src="https://logodownload.org/wp-content/uploads/2016/10/cnpq-logo.png" width="85" height="37"> 
          </center>')),
