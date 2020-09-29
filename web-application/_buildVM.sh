@@ -1,3 +1,4 @@
+## e2-micro	2	1GB	$9.71 month
 ## set user privileges
 sudo passwd
 ******** # set
