@@ -1,1 +1,1 @@
-## scene list (.tiff)
+## filter scene cloudness based on earthexplorer metadata 
