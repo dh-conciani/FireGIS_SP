@@ -1,1 +1,3 @@
 ## Shiny web-application
+
+![alt text](https://github.com/musx/FireLand_SPv1/blob/master/web-application/www/logo_1.png?raw=true)
