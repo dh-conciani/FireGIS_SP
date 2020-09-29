@@ -1,11 +1,11 @@
 ## set user privileges
 sudo passwd
-fireland-web
-fireland-web
+******** # set
+******** # set
 su root
 passwd dh_conciani
-fireland-web
-fireland-web
+******** #set
+******** # set
 gpasswd -a dh_conciani sudo
 su dh_conciani
 
@@ -13,7 +13,7 @@ su dh_conciani
 sudo apt-get update
 sudo apt-get -y install nginx
 
-## create swap (ubuntu 16.04 lts)
+## create 3GB swap (ubuntu 16.04 lts)
 cd /
 sudo dd if=/dev/zero of=swapfile bs=1M count=3000
 sudo mkswap swapfile
