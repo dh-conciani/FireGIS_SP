@@ -51,35 +51,16 @@ sudo su - -c "R -e \"install.packages(c('leaflet.extras'))\""
 sudo su - -c "R -e \"install.packages(c('stringi'))\""
 sudo su - -c "R -e \"install.packages(c('sf'))\""
 sudo su - -c "R -e \"install.packages(c('rgdal'))\""
-
-
-
-
-
-
-## update ubuntu libraries
-#sudo apt-get -y install libcurl4-gnutls-dev libxml2-dev libssl-dev
-#sudo apt-get update
-#sudo apt-get install libudunits2-dev
-
-## install GDAL
-#sudo add-apt-repository ppa:ubuntugis/ppa
-#sudo apt-get update
-#sudo apt-get install gdal-bin
-
-## build python GDAL
-#sudo apt-get install libgdal-dev
-#export CPLUS_INCLUDE_PATH=/usr/include/gdal
-#export C_INCLUDE_PATH=/usr/include/gdal
-#pip install GDAL==<GDAL VERSION FROM OGRINFO>
-
-## install r packages
-sudo su - -c "R -e \"install.packages(c('shinyjs','leaflet', 'leaflet.extras', 'rgdal', 'stringi', 'sf', 'raster', 'htmlwidgets', 'shiniydashboard', 'ggplot2', 'bsplus'), repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages(c('htmlwidgets'))\""
+sudo su - -c "R -e \"install.packages(c('shinydashboard'))\""
+sudo su - -c "R -e \"install.packages(c('ggplot2'))\""
+sudo su - -c "R -e \"install.packages(c('shinyWidgets'))\""
+sudo su - -c "R -e \"install.packages(c('bsplus'))\""
 
 ## install r studio server
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
-sudo gdebi rstudio-server-1.1.456-amd64.deb
+sudo wget https://download2.rstudio.org/server/xenial/amd64/rstudio-server-1.3.1093-amd64.deb
+sudo gdebi rstudio-server-1.3.1093-amd64.deb
 
 ## install shiny server
 sudo su - -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
@@ -87,5 +68,5 @@ sudo apt-get install gdebi-core
 sudo wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.9.923-amd64.deb
 sudo gdebi shiny-server-1.5.9.923-amd64.deb
 
-## server started at 3838 port
+## server started at IP:3838 port
 
