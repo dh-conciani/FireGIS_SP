@@ -39,6 +39,8 @@ apt-get upgrade
 
 ## update ubuntu libraries
 sudo apt-get -y install libcurl4-gnutls-dev libxml2-dev libssl-dev
+sudo apt-get update
+sudo apt-get install libudunits2-dev
 
 ## install GDAL
 sudo add-apt-repository ppa:ubuntugis/ppa
