@@ -8,6 +8,7 @@ library (raster)
 library (htmlwidgets)
 library (shinydashboard)
 library (ggplot2)
+library (shinyWidgets)
 library (bsplus)
 
 ## Define paths

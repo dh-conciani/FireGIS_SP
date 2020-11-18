@@ -57,20 +57,20 @@ function(input, output, session) {
   ###### 
   showModal(modalDialog(
     title = NULL,
-    HTML("<center><b>Welcome to</center></b>"),
+    HTML("<center><b>Bem-vindo</center></b>"),
     HTML('<center><img src="https://i.ibb.co/Lx83jRd/logo-1.png" 
                  width="350" height="175"></center>'),
     tags$hr(),
-    HTML("<b>Product:</b> Yearly burned area - Julian day per pixel<br>"),
-    HTML("<b>Based on</b>: Landsat 5, Landsat 7 and Landsat 8 (TM/ETM+/OLI) scenes classification</br>"),
-    HTML("<b>Spatial resolution:</b> 30 meters<br>"),
-    HTML("<b>Temporal resolution:</b> 16 days<br>"),
-    HTML("<b>Time interval</b>: 1985 to 2018<br>"),
+    HTML("<b>Produto:</b> Área queimada anual - Dia de detecção por pixel (1-365)<br>"),
+    HTML("<b>Baseado em</b>: Classificação de cenas Landsat (TM/ ETM+/ OLI)</br>"),
+    HTML("<b>Período</b>: 1985 até 2018<br>"),
+    HTML("<b>Resolução espacial:</b> 30x30 metros por pixel<br>"),
+    HTML("<b>Resolução temporal:</b> 16 dias<br>"),
     tags$hr(),
-    HTML("Omission and comission error occurs. If you find one, please, inform us using <i>'report tool'</i><br>"),
-    HTML("For more informations, read product article [insert-html-link]"),
+    HTML("Este produto apresenta erros de omissão e comissão. Caso identifique algum deles você pode nos reportar usando o sistema 'informar erro'. Atualizações para permitir correções colaborativas estão em curso e devem ser implementadas no futuro. <br>"),
+    HTML("<br>Para maiores informações, acesse: [Conciani et al., in prep]"),
     easyClose = FALSE,
-    footer = modalButton("Access")
+    footer = modalButton("Acessar")
   ))
   ######
   
@@ -109,11 +109,11 @@ function(input, output, session) {
       return ("pass")
     if (input$temporal_filter == 2012)
       return (NULL)
-    if (input$spatial_filter == "City") {
+    if (input$spatial_filter == "Município") {
       vec <- value_polygon$sp_filter 
       wrs <- vec$PR
       year <- input$temporal_filter
-      string_name <- paste0(raster_path,wrs,"_",year,"_JDBA.tif")
+      string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN.tif")
       print (string_name)
       r_product <- raster (string_name)
       vec_transf <- spTransform(vec, proj4string(r_product))
@@ -122,13 +122,13 @@ function(input, output, session) {
       return (croped_product)
     }
     
-    if (input$spatial_filter == "Protected Area") {
+    if (input$spatial_filter == "Unidade de Conservação") {
       if (input$add_buffer == TRUE) {
         vec <- value_polygon3$sp_filter 
         vec_ref <- value_polygon$sp_filter
         wrs <- vec_ref$PR
         year <- input$temporal_filter
-        string_name <- paste0(raster_path,wrs,"_",year,"_JDBA.tif")
+        string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN.tif")
         print (string_name)
         r_product <- raster (string_name)
         vec_transf <- spTransform(vec, proj4string(r_product))
@@ -141,7 +141,7 @@ function(input, output, session) {
         vec <- value_polygon$sp_filter 
         wrs <- vec$PR
         year <- input$temporal_filter
-        string_name <- paste0(raster_path,wrs,"_",year,"_JDBA.tif")
+        string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN.tif")
         print (string_name)
         r_product <- raster (string_name)
         vec_transf <- spTransform(vec, proj4string(r_product))
@@ -170,7 +170,7 @@ function(input, output, session) {
   
   ## load cities list
   mun_list = reactive ({
-    if (input$spatial_filter == "City") {
+    if (input$spatial_filter == "Município") {
       mun <- read.table (paste0(varlis_path, "municipios.txt"), sep="\t",  encoding = "latin1")
       return (mun$V1)
     }
@@ -182,7 +182,7 @@ function(input, output, session) {
   
   ## load categories
   cat_list = reactive ({
-    if (input$spatial_filter == "Protected Area") {
+    if (input$spatial_filter == "Unidade de Conservação") {
       cat <- read.table (paste0(varlis_path, "unidades_conservacao.txt"), sep="\t", header=TRUE, encoding = "latin1")
       return (sort(cat$CATEGORIA))
     }
@@ -194,7 +194,7 @@ function(input, output, session) {
   
   ## load protected area list
   uc_list = reactive ({
-    if (input$spatial_filter == "Protected Area") {
+    if (input$spatial_filter == "Unidade de Conservação") {
       if (input$category != "") {
       uc <- read.table (paste0(varlis_path, "unidades_conservacao.txt"), sep="\t", header=TRUE,  encoding = "latin1")
       uc <- subset(uc, CATEGORIA == input$category) 
@@ -210,7 +210,7 @@ function(input, output, session) {
   ## load polygon that matches to spatial filter
   ## if filter as city:
   observeEvent(input$municipio, {
-    if (input$spatial_filter == "" || input$spatial_filter == "Protected Area" || input$spatial_filter == "Draw Polygon")
+    if (input$spatial_filter == "" || input$spatial_filter == "Unidade de Conservação" || input$spatial_filter == "Draw Polygon")
       return (NULL)
     if (nchar(input$municipio) == 0)
       return (NULL)
@@ -222,7 +222,7 @@ function(input, output, session) {
   })
   ## if filter as protected area:
   observeEvent(input$uc, {
-    if (input$spatial_filter == "" || input$spatial_filter == "City" || input$spatial_filter == "Draw Polygon" ||
+    if (input$spatial_filter == "" || input$spatial_filter == "Município" || input$spatial_filter == "Draw Polygon" ||
         input$uc == "")
       return (NULL)
     print ("carregar uc")
@@ -260,7 +260,7 @@ function(input, output, session) {
   
   ## update leaflet with user's spatial filter
   observe({
-    if (input$spatial_filter == "City") { 
+    if (input$spatial_filter == "Município") { 
       print ("filter city enabled")
       print ("city names as:")
       print (input$municipio)
@@ -287,7 +287,7 @@ function(input, output, session) {
     
     
     
-    if (input$spatial_filter == "Protected Area") { 
+    if (input$spatial_filter == "Unidade de Conservação") { 
       print ("filter protected area enabled")
       print ("protected area as:")
       print (input$uc)
@@ -354,8 +354,8 @@ function(input, output, session) {
     if (input$temporal_filter != "") {
       if (is.null (load_product())) {
         leafletProxy("map") %>% clearImages()
-        return(showNotification(type= "error", duration = 10, "2012 under review, select another year"))}
-          showModal(modalDialog(HTML("<center>Processing....</center>"), footer = NULL))
+        return(showNotification(type= "error", duration = 10, "2012 em revisão, selecione outro ano"))}
+          showModal(modalDialog(HTML("<center>Processando solicitação</center>"), footer = NULL))
           leafletProxy("map") %>%
             clearImages() %>%
             clearControls() %>%
