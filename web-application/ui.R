@@ -1,4 +1,4 @@
-bootstrapPage(
+bootstrapPage(theme = shinytheme("sandstone"),
   title = NULL,
   ## Definir CSS e Java script dos componentes
   useShinyjs(),
@@ -52,7 +52,7 @@ bootstrapPage(
                                 choices = c (""),
                                 multiple = FALSE, selected = "") %>%
                      shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
-                                              bs_embed_popover(title     =  "Info:", 
+                                              bs_embed_popover(title     =  "Município:", 
                                                                content   =  "Limites municipais fornecidos pelo IBGE (Instituto Brasileiro de Geografia e Estatistica)",
                                                                placement = "left",
                                                                trigger   = "hover",
@@ -66,7 +66,7 @@ bootstrapPage(
               choices = c (""),
               multiple = FALSE, selected = "") %>%
     shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
-                             bs_embed_popover(title     =  "Info:", 
+                             bs_embed_popover(title     =  "Categoria:", 
                                               content   =  "Baseado nas classes do Sistema Nacional de Unidades de Conservação (SNUC - Lei Federal 9985 /2000)",
                                               placement = "left",
                                               trigger   = "hover",
@@ -78,8 +78,8 @@ bootstrapPage(
               choices = c (""),
               multiple = FALSE, selected = "") %>%
     shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
-                             bs_embed_popover(title     =  "Info:", 
-                                              content   =  "Protected area borders provided by SIMA/SP (Secretaria de Infraestrutura e Meio Ambiente do Estado de Sao Paulo) and MMA/BR (Ministerio do Meio Ambiente do Brasil)",
+                             bs_embed_popover(title     =  "UC:", 
+                                              content   =  "Limites fornecidos pela SIMA/SP (Secretaria de Infraestrutura e Meio Ambiente do Estado de Sao Paulo) and MMA/BR (Ministerio do Meio Ambiente do Brasil)",
                                               placement = "left",
                                               trigger   = "hover",
                                               options   = list(container = "body"))),
@@ -108,7 +108,7 @@ bootstrapPage(
               label = "Área queimada - Ano",
               choices = c("", seq(1985,2018))) %>%
         shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
-                             bs_embed_popover(title     =  "Info:", 
+                             bs_embed_popover(title     =  "Área queimada", 
                                               content   =  "O valor de cada pixel representa o dia juliana (1-365) em que uma queima foi detectada",
                                               placement = "left",
                                               trigger   = "hover",
@@ -137,7 +137,7 @@ bootstrapPage(
                      fixed = FALSE,
                      draggable = FALSE, 
                      top = 10, left = 410, right = "auto", bottom = "auto",
-                     width = 250, height = "auto",
+                     width = 350, height = "auto",
                      tags$h4(tags$b("Informar erro")),
                      tags$hr(),
                      actionButton(inputId = "report_comission",

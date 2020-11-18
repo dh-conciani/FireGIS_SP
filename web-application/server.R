@@ -159,7 +159,7 @@ function(input, output, session) {
       geom_histogram(colour="black", fill="green4", bins= 12, alpha=0.7) +
       scale_x_continuous(breaks = c(30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365),
                          labels = c("J","F","M","A","M","J","J","A","S","O","N","D")) +
-      xlab("month") + ylab("pixel count") + ggtitle ("Burn distribution") +
+      xlab("mês") + ylab("n de pixel queimado") + ggtitle ("Sazonalidade do fogo") +
       theme_classic())
   }
   output$hist <- renderPlot ({
@@ -373,7 +373,7 @@ function(input, output, session) {
                                           seq(1,365), 
                                           na.color = "transparent"),
                        values =  seq(1,365), 
-                       title = "julian day", position = "topright",
+                       title = "Dia juliano", position = "topright",
                        labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
           removeModal()
       }
