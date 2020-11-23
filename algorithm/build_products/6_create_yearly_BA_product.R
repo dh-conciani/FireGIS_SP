@@ -11,14 +11,15 @@ tile <- subset (db, path_row == levels(as.factor(db$path_row))[9])
 print (paste0("tile = ", levels(as.factor(tile$path_row))))
 
 ## extract temporal parameters
-seq_yr <- unique(tile$year)
-#seq_yr <- seq(2004, 2011)
+#seq_yr <- unique(tile$year)
+seq_yr <- seq(1985, 2011)
 
 ## loop for
 for (i in 1:length(seq_yr)) {
   print (paste0("processing ", seq_yr[i], " year"))
   print (paste0(i, " of ", length (seq_yr)))
   yr_list <- tile[grep(seq_yr[i], tile$year),]         ## subset n year
+  #yr_list <- yr_list[5:16,]
   r_list <- lapply (yr_list$dest, raster)              ## read as raster
   
   ## compute extents and standardize all raster extents
@@ -35,18 +36,30 @@ for (i in 1:length(seq_yr)) {
   ## dissolve extents. raster cells outside extent are filled with NA 
   print ("filling raster outbounds with NA")
   r_resample <- lapply (r_list, function(x) extend (x, extent (gUnaryUnion(joined_polygons)), value = NA))
-
+  gc()
+  ###### ONLY FOR MINIMUM ######
+  ## convert all 0 to NA
+  r_resample <- lapply(r_resample, function(x) raster::clamp (x, lower=1, useValues=F))
+  gc()
+  ##############################
+  
   ## stack raster
   r_stack <- stack (r_resample)
+  gc()
 
   ## calc max julian day per pixel
-  print ("building maximum julian day raster from stack")
-  max_jd <- calc(r_stack, fun = max, na.rm=TRUE) 
+  print ("building minimum/maximum julian day raster from stack")
+  max_jd <- calc(r_stack, fun = min, na.rm=TRUE) 
+  gc()
   
   ## export yearly product
   print ("exporting raster file")
-  writeRaster(max_jd, paste0 ('./qa_S30MB1HA_YR/',unique(tile$path_row),'_',seq_yr[i],'_','JDBA.tif'), overwrite=TRUE, NAflag=-9999)
+  writeRaster(max_jd, paste0 ('./qa_S30MB1HA_JDYRMIN/',unique(tile$path_row),'_',seq_yr[i],'_','JDBAMIN.tif'), overwrite=TRUE, NAflag=-9999)
   print ("-----> done")
+  rm (r_resample, r_stack)
   removeTmpFiles(h=0)
   gc()
 }
+
+
+
