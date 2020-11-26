@@ -57,19 +57,26 @@ function(input, output, session) {
   ###### 
   showModal(modalDialog(
     title = NULL,
-    HTML("<center><b>Bem-vindo</center></b>"),
-    HTML('<center><img src="https://i.ibb.co/Lx83jRd/logo-1.png" 
+    HTML("<center><b>Bem-vindo à plataforma</center></b>"),
+    HTML('<center><img src="https://i.ibb.co/X58rpzq/logo-1.png" 
                  width="350" height="175"></center>'),
+    HTML("<center>O FireGIS é uma plataforma interativa para acesso, visualização e análise de áreas queimadas no Cerrado paulista</center>"),
     tags$hr(),
-    HTML("<b>Produto:</b> Área queimada anual - Dia de detecção por pixel (1-365)<br>"),
-    HTML("<b>Baseado em</b>: Classificação de cenas Landsat (TM/ ETM+/ OLI)</br>"),
-    HTML("<b>Período</b>: 1985 até 2018<br>"),
-    HTML("<b>Resolução espacial:</b> 30x30 metros por pixel<br>"),
+    HTML("<b>Ficha técnica:</b><br>"),
+    HTML("<b>Origem:</b> Classificação pixel-pixel de 4153 cenas Landsat (TM, ETM+, OLI)<br>"),
+    HTML("<b>Resolução espacial:</b> 30x30 metros/pixel<br>"),
     HTML("<b>Resolução temporal:</b> 16 dias<br>"),
+    HTML("<b>Período:</b>1985 - 2018<br>"),
+    HTML("<b>Acurácia média:</b> 79%</b><br>"),
+    HTML("<b>Erro médio:</b> Omissão= 16% | Comissão = 9%<br>"),
     tags$hr(),
-    HTML("Este produto apresenta erros de omissão e comissão. Caso identifique algum deles você pode nos reportar usando o sistema 'informar erro'. Atualizações para permitir correções colaborativas estão em curso e devem ser implementadas no futuro. <br>"),
-    HTML("<br>Para maiores informações, acesse: [Conciani et al., in prep]"),
+    HTML("<b>Produtos disponíveis:</b><br>"),
+    HTML("I.   Área queimada anual - Dia juliano de detecção por pixel (1-365)<br><br>"),
+    HTML("<b>Produtos em implementação:</b><br>"),
+    HTML("II.  Contagem de queimas - Número de anos em que um mesmo pixel foi detectado como área queimada (0-34)<br>"),
+    HTML("III. Última queima - Último ano que uma queima foi detectada em cada pixel (1985-2018)<br><br>"),
     easyClose = FALSE,
+    size= "l",
     footer = modalButton("Acessar")
   ))
   ######
@@ -113,7 +120,7 @@ function(input, output, session) {
       vec <- value_polygon$sp_filter 
       wrs <- vec$PR
       year <- input$temporal_filter
-      string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN.tif")
+      string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN_5HA.tif")
       print (string_name)
       r_product <- raster (string_name)
       vec_transf <- spTransform(vec, proj4string(r_product))
@@ -128,7 +135,7 @@ function(input, output, session) {
         vec_ref <- value_polygon$sp_filter
         wrs <- vec_ref$PR
         year <- input$temporal_filter
-        string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN.tif")
+        string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN_5HA.tif")
         print (string_name)
         r_product <- raster (string_name)
         vec_transf <- spTransform(vec, proj4string(r_product))
@@ -141,7 +148,7 @@ function(input, output, session) {
         vec <- value_polygon$sp_filter 
         wrs <- vec$PR
         year <- input$temporal_filter
-        string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN.tif")
+        string_name <- paste0(raster_path,wrs,"_",year,"_JDBAMIN_5HA.tif")
         print (string_name)
         r_product <- raster (string_name)
         vec_transf <- spTransform(vec, proj4string(r_product))
@@ -155,17 +162,123 @@ function(input, output, session) {
   # calc histogram based on spatial/temporal filter
   calc_hist <- function () {
     r <- load_product()
+    spatial <- spTransform(value_polygon$sp_filter, proj4string(r))
+    r_buffer <- mask (r, spatial, inverse= TRUE)
+    r_uc <- mask(r, spatial)
+
+    if (input$spatial_filter == "Município")
     return(ggplot(as.data.frame(r[!r==0]), aes (x= r[!r==0])) +
       geom_histogram(colour="black", fill="green4", bins= 12, alpha=0.7) +
       scale_x_continuous(breaks = c(30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365),
                          labels = c("J","F","M","A","M","J","J","A","S","O","N","D")) +
-      xlab("mês") + ylab("n de pixel queimado") + ggtitle ("Sazonalidade do fogo") +
+      xlab("mês") + ylab("n de pixel queimado") + ggtitle ("Sazonalidade das queimas") +
       theme_classic())
+    
+    if (input$spatial_filter == "Unidade de Conservação") {
+      if (input$add_buffer == FALSE) 
+        return(ggplot(as.data.frame(r[!r==0]), aes (x= r[!r==0])) +
+                 geom_histogram(colour="black", fill="green4", bins= 12, alpha=0.7) +
+                 scale_x_continuous(breaks = c(30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365),
+                                    labels = c("J","F","M","A","M","J","J","A","S","O","N","D")) +
+                 xlab("mês") + ylab("n de pixel queimado") + ggtitle ("Sazonalidade das queimas") +
+                 theme_classic())
+      
+      if (input$add_buffer == TRUE) {
+        print ("buffer ativado")
+        df_uc <- as.data.frame(r_uc[!r_uc==0])
+        df_buffer <- as.data.frame(r_buffer[!r_buffer==0])
+        
+        ## insert data into empty objectrs when it occurs
+        if (nrow(df_uc) == 0){
+          df_uc[1, ] <- NA
+          df_uc[1] <- NA
+        }
+        if (nrow(df_buffer) == 0){
+          df_buffer[1, ] <- NA
+          df_buffer[1] <- NA
+        }
+        
+        colnames(df_uc)[1] <- "value"; df_uc$lab <- "UC"
+        colnames(df_buffer)[1] <- "value"; df_buffer$lab <- "Buffer"
+        df <- rbind(df_uc, df_buffer)
+       
+        return(ggplot(df, aes (x= value, fill= lab)) +
+                 geom_histogram(bins= 12, alpha=0.7, position="stack") +
+                 scale_fill_manual(values=c("red","blue")) + 
+                 scale_x_continuous(breaks = c(30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365),
+                                    labels = c("J","F","M","A","M","J","J","A","S","O","N","D")) +
+                 xlab("mês") + ylab("n de pixel queimado") + ggtitle ("Sazonalidade das queimas") +
+                 labs(fill = "Legenda") +
+                 theme_classic())
+      }
+    }
   }
+
+    
   output$hist <- renderPlot ({
     if (is.null(input$temporal_filter) || input$temporal_filter == "")
       return (NULL)
     calc_hist()
+  })
+  
+  ## calc total burned area based on spatial/temporal filter
+  calc_total_area <- function () {
+    r <- load_product()
+    values <- getValues (r)
+    values <- na.omit(values)
+    return (length(values))
+  }
+  calc_uc_area <- function () {
+    r <- load_product()
+    spatial <- spTransform(value_polygon$sp_filter, proj4string(r))
+    r_uc <- mask(r, spatial)
+    values <- getValues(r_uc)
+    values <- na.omit (values)
+    return (length(values))
+  }
+  calc_buffer_area <- function () {
+    r <- load_product()
+    spatial <- spTransform(value_polygon$sp_filter, proj4string(r))
+    r_buffer <- mask (r, spatial, inverse= TRUE)
+    values <- getValues(r_buffer)
+    values <- na.omit (values)
+    return (length(values))
+  }
+  
+  output$area <- renderText({
+    if (is.null(input$temporal_filter) || input$temporal_filter == "")
+      return (NULL)
+    if (input$spatial_filter == "Unidade de Conservação")
+      return(paste0("<br><b>Área queimada na UC</b>= ", calc_uc_area()*900/10000, " hectares<br><br>
+                     <b>Área queimada no Buffer</b>= ", calc_buffer_area()*900/10000, "  hectares<br><br>
+                    <b>Área queimada total= </b>", calc_total_area()*900/10000, " hectares<br></b><br>"))
+    
+    if (input$spatial_filter == "Município")
+      return (paste0("<br><b>Área queimada no município</b>= ", calc_total_area()*900/10000, " hectares <br>"))
+  })
+  
+  ## render documentacao HTML
+  output$documentacao <- renderText({
+    # return(paste0("<br><br><br><br><b><h3>Resumo técnico:</h3></b>
+    #               <h4>Um classificador de áreas queimadas baseado em aprendizagem de máquina (Random Forest) foi treinado e ajustado a partir de uma biblioteca espectral de referência. Este classificador foi empregado na reconstrução do histórico de áreas queimadas através da classificação de 4153 cenas Landsat (TM, ETM+, OLI) entre 1985 e 2018. Etapas de pós-processamento foram aplicadas para mitigar tendências de erro em áreas urbanas, mineração, praias e áreas de alto declive. Apenas queimas maiores que 1 hectare foram compiladas no produto final.<br><br>
+    #               O produto foi validado considerando um mapeamento independente para Franco da Rocha, Tanabi, Rancharia e São Carlos. Uma acurácia média de 79% foi observada, sendo maior em Rancharia (88%) e menor em Franco da Rocha (71%). Erros foram balanceados para priorizar a subestimação (16%) em relação a superestimação (9%). Ainda que espacialmente restritas, grandes superestimações foram detectadas em áreas de várzea sobre stress-hídrico, plantações de hortaliças e indústria pesada (petróleo e aço).<br></h4>"))
+    return(paste0("<br><br><br><br><b><h3>Pre-print:</h3></b><h4>1. Conciani et al., in prep. Developing a machine learning based algorithm for regional time-series burned area mapping: The highly anthropized Cerrado challenge<br>",
+                  actionButton(inputId= "download_p1", label= "PDF", class= "btn-primary", icon=icon("file-pdf"), size="mini"), "<br><br>
+                  2. Conciani et al., in press. Human-Climate interactions shape fire regimes in the Cerrado of São Paulo State, Brazil. <i>Journal For Nature Conservation</i><br>",
+                  actionButton(inputId= "download_p2", label= "PDF", class= "btn-primary", icon=icon("file-pdf"), size="mini")))
+  
+  })
+  
+  ## render contact form
+  output$contato <- renderText({
+    # return(paste0("<br><br><br><br><b><h3>Resumo técnico:</h3></b>
+    #               <h4>Um classificador de áreas queimadas baseado em aprendizagem de máquina (Random Forest) foi treinado e ajustado a partir de uma biblioteca espectral de referência. Este classificador foi empregado na reconstrução do histórico de áreas queimadas através da classificação de 4153 cenas Landsat (TM, ETM+, OLI) entre 1985 e 2018. Etapas de pós-processamento foram aplicadas para mitigar tendências de erro em áreas urbanas, mineração, praias e áreas de alto declive. Apenas queimas maiores que 1 hectare foram compiladas no produto final.<br><br>
+    #               O produto foi validado considerando um mapeamento independente para Franco da Rocha, Tanabi, Rancharia e São Carlos. Uma acurácia média de 79% foi observada, sendo maior em Rancharia (88%) e menor em Franco da Rocha (71%). Erros foram balanceados para priorizar a subestimação (16%) em relação a superestimação (9%). Ainda que espacialmente restritas, grandes superestimações foram detectadas em áreas de várzea sobre stress-hídrico, plantações de hortaliças e indústria pesada (petróleo e aço).<br></h4>"))
+    return(paste0("<br><br><br><br><b><h4>Dhemerson Conciani</b><br>
+                  +55 (19) 9 9911-8603 <br>
+                  <a href= 'mailto:dhemerson.conciani@unesp.br'>dhemerson.conciani@unesp.br</a><br>
+                  Departamento de Biodiversidade - UNESP"))
+    
   })
   
   ## load cities list
@@ -206,6 +319,34 @@ function(input, output, session) {
   updateSelectInput(session, "uc",
                     choices = c("", uc_list()))
   }) # update protected area variable
+  
+  ## open manager menu
+  observeEvent(input$login_gestor, {
+    showModal(modalDialog(
+      title = "Módulo de edição - Em desenvolvimento",
+      textInput(inputId= "usuario", label= "Usuário", value = "gestor@instituicao.br", width= 200),
+      passwordInput(inputId= "senha", label= "Senha", value = "testedeesenha", width= 200),
+      actionButton(inputId = "login", label= "Entrar", class = "btn-primary", size= "mini"),
+      footer = modalButton("Voltar")
+    ))
+  })
+  
+  ## download pre-prints (p1)
+  observeEvent(input$download_p1, {
+    showModal(modalDialog(
+      title = "Download do Pre-print",
+      tags$h4("Disponível em breve"),
+      footer = modalButton("Voltar")
+    ))
+  })
+  ## download pre-prints (p2)
+  observeEvent(input$download_p2, {
+    showModal(modalDialog(
+        title = "Download do Pre-print",
+        tags$h4("Disponível em breve"),
+        footer = modalButton("Voltar")
+    ))
+  })
   
   ## load polygon that matches to spatial filter
   ## if filter as city:

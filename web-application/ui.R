@@ -1,14 +1,15 @@
-bootstrapPage(theme = shinytheme("sandstone"),
-  title = NULL,
+navbarPage(theme = shinytheme("sandstone"),
+  title = "FireGIS", position= "fixed-top",
+  tabPanel("Plataforma",  icon = icon("map-marked"),
   ## Definir CSS e Java script dos componentes
   useShinyjs(),
-           
+  
   div(class="outer", tags$head(includeCSS("styles.css"))),
   ## Estilo do popup de help
    tags$style(HTML('.popover-title {color:blue; font-weight:bold}}
                     .popover-content {color:blue; font-weight:italic}
                     .main-sidebar {z-index:auto;}')),
-  
+
   ## Definir o CSS do mapa interativo e plotar em tela cheia 
   div(class= 'outer',
       tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
@@ -33,14 +34,14 @@ bootstrapPage(theme = shinytheme("sandstone"),
                  id = "main_menu", 
                  fixed = FALSE,
                  draggable = FALSE, 
-                 top = 10, left = "20", right = "auto", bottom = "auto",
+                 top = 90, left = "20", right = "auto", bottom = "auto",
                  width = 350, height = "auto",
-                 tags$h4(tags$b("FireGIS Visualizer 🔥")),
+                 tags$h4(tags$b(tags$span(style="color:white", "Menu FireGIS 🔥"))),
                  tags$hr(),
   
   ## Select spatial filter
   selectInput(inputId = "spatial_filter",
-              label = "Filtro espacial",
+              label = tags$span(style="color:white", "Filtro espacial"),
               choices = c("", "Município", "Unidade de Conservação"),
               multiple = FALSE, selected = ""),
   
@@ -48,7 +49,7 @@ bootstrapPage(theme = shinytheme("sandstone"),
   conditionalPanel("input.spatial_filter == 'Município'",
                    use_bs_popover(),
                    selectInput(inputId = "municipio",
-                                label = "Município",
+                                label = tags$span(style="color:white", "Município"),
                                 choices = c (""),
                                 multiple = FALSE, selected = "") %>%
                      shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
@@ -62,7 +63,7 @@ bootstrapPage(theme = shinytheme("sandstone"),
   ## Select protected area
   conditionalPanel("input.spatial_filter == 'Unidade de Conservação'",
   selectInput(inputId = "category",
-              label = "Categoria",
+              label = tags$span(style="color:white", "Categoria"),
               choices = c (""),
               multiple = FALSE, selected = "") %>%
     shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
@@ -74,12 +75,12 @@ bootstrapPage(theme = shinytheme("sandstone"),
   
   conditionalPanel("input.category != ''",
   selectInput(inputId = "uc",
-              label = "Unidade de Conservação",
+              label = tags$span(style="color:white", "Unidade de Conservação"),
               choices = c (""),
               multiple = FALSE, selected = "") %>%
     shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
                              bs_embed_popover(title     =  "UC:", 
-                                              content   =  "Limites fornecidos pela SIMA/SP (Secretaria de Infraestrutura e Meio Ambiente do Estado de Sao Paulo) and MMA/BR (Ministerio do Meio Ambiente do Brasil)",
+                                              content   =  "Limites fornecidos pela SIMA/SP (Secretaria de Infraestrutura e Meio Ambiente do Estado de Sao Paulo) e MMA/BR (Ministerio do Meio Ambiente do Brasil)",
                                               placement = "left",
                                               trigger   = "hover",
                                               options   = list(container = "body"))),
@@ -87,7 +88,7 @@ bootstrapPage(theme = shinytheme("sandstone"),
   conditionalPanel("input.uc != ''",
                    div(style="display:inline-block",
                    prettyCheckbox (inputId = "add_buffer",
-                                   label = tags$span(style="color:green", "Adicionar zona de amortecimento"),
+                                   label = tags$span(style="color:Gold", "Adicionar zona de amortecimento"),
                                    value = FALSE,
                                    icon = icon ("check"),
                                    animation = "smooth",
@@ -97,61 +98,46 @@ bootstrapPage(theme = shinytheme("sandstone"),
   
   conditionalPanel("input.add_buffer == true",
                    sliderInput(inputId = "buffer_size",
-                               label = "Raio da zona de amortecimento (km)",
+                               label = tags$span(style="color:white", "Raio da zona de amortecimento (km)"),
                                min = 1,
                                max = 20,
-                               value = 10)))),
+                               value = 5)))),
   
   ## Selecionar filtro temporal
   conditionalPanel("input.municipio != '' || input.uc != ''", 
   selectInput(inputId = "temporal_filter",
-              label = "Área queimada - Ano",
+              label = tags$span(style="color:white", "Produto"),
               choices = c("", seq(1985,2018))) %>%
         shinyInput_label_embed(shiny_iconlink(name = "question-circle") %>%
                              bs_embed_popover(title     =  "Área queimada", 
-                                              content   =  "O valor de cada pixel representa o dia juliana (1-365) em que uma queima foi detectada",
+                                              content   =  "Produtos em formato ano (ex: 1985 - 2018) referem-se às áreas queimadas anuais. COUNT refere-se ao produto que compila todos os anos da série e mostra a quantidade de vezes que um mesmo pixel foi detectado como área queimada. LASF_FIRE refere-se ao último ano da série em que um pixel foi detectado como área queimada.",
                                               placement = "left",
                                               trigger   = "hover",
-                                              options   = list(container = "body")))),
-  
-  ## create histogram
-  conditionalPanel("input.temporal_filter != ''", 
-                   tags$hr(), 
-  plotOutput("hist", height = 220),
-  
-  ## create report tool option
-  helpText("Nota: Ajude-nos a melhorar a qualidade deste produto :)"),
-  prettyCheckbox (inputId = "active_report_tool",
-                  label = tags$b(tags$span(style="color:red", "Informar erro")),
-                  value = FALSE,
-                  icon = icon ("check"),
-                  animation = "smooth",
-                  status = "danger",
-                  shape = "curve"))
+                                              options   = list(container = "body"))),
+  conditionalPanel("input.spatial_filter == 'Unidade de Conservação'", 
+                   actionButton(inputId= "login_gestor", label= "Acesso Editor", class= "btn-warning", size="mini")))
   ),
   
-  ## create report panel
-  conditionalPanel("input.active_report_tool == true",
+  ## create statistical box
+  conditionalPanel("input.temporal_filter != ''",
                    absolutePanel(
-                     id = "report_tool", 
-                     fixed = FALSE,
-                     draggable = FALSE, 
-                     top = 10, left = 410, right = "auto", bottom = "auto",
-                     width = 350, height = "auto",
-                     tags$h4(tags$b("Informar erro")),
-                     tags$hr(),
-                     actionButton(inputId = "report_comission",
-                                  label = "Erro de comissão",
-                                  class = "btn-danger"),
-                     helpText("Quando uma área aparece como queimada no mapa mas não queimou na realidade"),
-                     tags$hr(),
-                     
-                     actionButton(inputId = "report_omission",
-                                 label = "Erro de omissão",
-                                 class = "btn-warning"),
-                     helpText("Quando uma área queimou na realidade mas não aparece no mapa")
-                     ))
+                    id= "statistical_box",
+                    fixed= FALSE,
+                    draggable = FALSE,
+                    top = "auto", left= "auto", right = 30, bottom = 90,
+                    width = 350, height = 280,
+                    tabsetPanel(type="tabs", id="statistical_tabs",
+                              tabPanel(tags$span(style="color:black", "Sazonalidade"), 
+                    plotOutput("hist", height = 220)),
+                    tabPanel(tags$span(style="color:black", "Área"),
+                             htmlOutput("area", height = 220))))
+                   ),
+                  
+  ),
+  tabPanel("Documentação", icon=icon("book"),
+           htmlOutput("documentacao")),
   
-  
+    tabPanel("Contato", icon=icon("mail-bulk"),
+             htmlOutput("contato"))
 )
 

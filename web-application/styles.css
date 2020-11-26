@@ -19,7 +19,7 @@ h1, h2, h3, h4 { font-weight: 300; }
 
 #main_menu {
   /* Appearance */ /* do menu lateral*/
-  background-color: white;
+  background-color: #404040;
   padding: 0 20px 20px 20px;
   cursor: move;
   /* Fade out while not hovering */
@@ -46,6 +46,23 @@ h1, h2, h3, h4 { font-weight: 300; }
   
 }
 #report_tool:hover {
+  /* Fade in while hovering */
+  opacity: 1;
+  transition-delay: 0;
+}
+
+#statistical_box {
+  /* Appearance */ /* do menu lateral*/
+  background-color: white;
+  padding: 0 20px 20px 20px;
+  cursor: move;
+  /* Fade out while not hovering */
+  opacity: 0.9;
+  zoom: 0.9;
+  transition: opacity 500ms 1s;
+  
+}
+#statistical_box:hover {
   /* Fade in while hovering */
   opacity: 1;
   transition-delay: 0;
