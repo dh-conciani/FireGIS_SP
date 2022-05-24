@@ -24,8 +24,8 @@ var files = ee.ImageCollection('users/dh-conciani/fire_sp')
           );
 
 
-// get image for the year [i]
-var fire = files.filterMetadata('year', 'equals', '1985').min().aside(print);
+// get image for the year (from 1985 to 2018)
+var fire = files.filterMetadata('year', 'equals', '2018').min().aside(print);
 
 // plot
 Map.addLayer(fire, {palette:['darkgreen', 'green', 'yellow', 'orange', 'red', 'yellow', 'green'], 
