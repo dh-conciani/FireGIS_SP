@@ -34,6 +34,9 @@ ee.List.sequence({'start': 1985, 'end': 2018}).getInfo()
   }
 );
 
+// print dataset
+print('dataset structure:', recipe);
+
 // compute fire frequency 
 var freq = recipe.reduce(ee.Reducer.countDistinctNonNull());
 
