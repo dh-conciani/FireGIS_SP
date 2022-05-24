@@ -23,10 +23,26 @@ var files = ee.ImageCollection('users/dh-conciani/fire_sp')
             }
           );
 
+// build image (one year per band)
+var recipe = ee.Image([]);
+// for each year
+ee.List.sequence({'start': 1985, 'end': 2018}).getInfo()
+  .forEach(function(year_i) {
+    var file_i = files.filterMetadata('year', 'equals', String(year_i)).min();
+    // insert into recipe
+    recipe = recipe.addBands(file_i.rename('fire_' + String(year_i)));
+  }
+);
+
+// compute fire frequency 
+var freq = recipe.reduce(ee.Reducer.countDistinctNonNull());
 
 // get image for the year (from 1985 to 2018)
-var fire = files.filterMetadata('year', 'equals', '2018').min().aside(print);
+var fire = recipe.select(['fire_2010']);
 
 // plot
 Map.addLayer(fire, {palette:['darkgreen', 'green', 'yellow', 'orange', 'red', 'yellow', 'green'], 
-                      min:1, max:365 }, 'fire');
+                      min:1, max:365 }, 'Fire 2010', false);
+
+// plot frequency 
+Map.addLayer(freq, {palette:['yellow', 'orange', 'red', 'purple'], min:1, max:7}, 'Frequency 1985-2018');
