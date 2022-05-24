@@ -1,5 +1,5 @@
 // Load burned area for são paulo state cerrado
-// Conciani et al., 2022
+// Conciani et al., 20XX
 
 // load cerrado biome
 var biomes = ee.Image('projects/mapbiomas-workspace/AUXILIAR/biomas-estados-2016-raster');
